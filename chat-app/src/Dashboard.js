@@ -45,7 +45,7 @@ const Dashboard = () => {
 
   const classes = useStyles();
 
-    const[allChats] = React.useContext(CTX);
+    const {allChats,sendChatAction,user} = React.useContext(CTX);
 
     //console.log({allChats});
 
@@ -62,7 +62,7 @@ const Dashboard = () => {
         <Typography variant="h5" component="h5">
           {activeTopic}
         </Typography>
-      </Paper>
+    
       <div className={classes.flex}>
         <div className={classes.topicsWindow}>
             <List>
@@ -99,10 +99,19 @@ const Dashboard = () => {
           >
 
           </TextField>
-      <Button variant="contained" color="primary">
+      <Button 
+      variant="contained" 
+      color="primary"
+      className={classes.button}
+      onClick={ () => {
+        sendChatAction({from:user,msg:textValue,topic:activeTopic});
+        changeTextValue('');
+      } }
+      >
         Send
       </Button>
       </div>
+      </Paper>
     </div>
   );
 };
